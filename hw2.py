@@ -43,9 +43,7 @@ def ex_8():
     #w = (x' * x) ^ -1 * x' * y
     w = np.linalg.inv(x.T * x) * x.T * y
     diff = np.sign(w.T * x.T) - y.T 
-    for i in np.nditer(diff):
-      if i == 0:
-        e_count += 1
+    e_count += error_count(w,x,y)
     
   print("mean error {}".format(e_count/(data_size * trials)))
 
@@ -84,5 +82,5 @@ def ex_9_and_10():
     
 
 
-#ex_8()
+ex_8()
 ex_9_and_10()
