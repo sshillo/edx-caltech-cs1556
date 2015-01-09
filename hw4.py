@@ -86,7 +86,29 @@ def prob4():
 
   print("bias {} var {} gbar {}".format(expected_bias,expected_var, gbar))
 
-prob4()
+def prob7():
+  N = 200
+  x = r.random(N) * 10 - 5
+  x.sort()
+
+  y = x **2
+  #plt.plot(x,y)
+  #plt.show()
+  #xm = np.concatenate((np.ones((N,1)), np.zeros((N,1)), np.mat(x).T), axis=1)
+  xm = np.mat(x).T
+  #print(xm)
+  h = np.linalg.inv(xm.T * xm) * xm.T * np.mat(y).T
+  print(h[0,0])
+  hx = h[0,0] * x ** 2
+  
+  plt.plot(x,y,x,hx)
+  plt.show()
+
+# b
+# ax + b
+# ax^2
+# ax^2 + b
+prob7()
 #prob2()
 #prob3()
 
