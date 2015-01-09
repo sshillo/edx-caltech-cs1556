@@ -1,6 +1,7 @@
 from math import log
 import matplotlib.pyplot as plt
 import numpy as np
+import numpy.random as r
 
 def prob1():
   n = 1000
@@ -59,5 +60,33 @@ def prob3():
   plt.show()
 
 
+def prob4():
+  result = np.array([])
+  full_data = np.array([])
+  for i in range(5000):
+    d = np.mat(r.random(2) * 2 - 1)
+    full_data = np.append(full_data, d)
+    d = d.T
+    y = np.sin(d * np.pi)
+    #print(y)
+    a = np.linalg.inv(d.T * d) * d.T * y
+    result = np.append(result, a)
+    #print(a)
+  #print(result)
+  gbar = np.mean(result)
+
+  var_array = np.array([])
+  for i, d in enumerate(np.array_split(full_data, 5000)):
+    y = result[i]
+    dvar = np.mean((d * y - d * gbar) ** 2)
+    var_array = np.append(var_array, dvar)
+
+  expected_bias = np.mean((gbar * full_data - np.sin(full_data * np.pi)) ** 2)
+  expected_var = np.mean(var_array)
+
+  print("bias {} var {} gbar {}".format(expected_bias,expected_var, gbar))
+
+prob4()
 #prob2()
-prob3()
+#prob3()
+
