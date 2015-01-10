@@ -63,6 +63,10 @@ def prob3():
 def prob4():
   result = np.array([])
   full_data = np.array([])
+  n = 5000
+  data = = r.random((n, 2)) * 2 - 1
+  y = np.sin(data * np.pi)
+
   for i in range(5000):
     d = np.mat(r.random(2) * 2 - 1)
     full_data = np.append(full_data, d)
@@ -86,22 +90,39 @@ def prob4():
 
   print("bias {} var {} gbar {}".format(expected_bias,expected_var, gbar))
 
+def test_hypoth(n):
+  g
+
+
+
 def prob7():
   N = 200
   x = r.random(N) * 10 - 5
   x.sort()
 
-  y = x **2
+  xm = np.mat(x).T
+
+  z = x ** 2
+  zm = np.mat(z).T
+  zm = np.concatenate((np.ones((N,1)), np.power(xm,2)), axis=1)
+  print(zm)
+
+  y = x ** 2 + 10.
+  #print(y)
   #plt.plot(x,y)
   #plt.show()
   #xm = np.concatenate((np.ones((N,1)), np.zeros((N,1)), np.mat(x).T), axis=1)
-  xm = np.mat(x).T
   #print(xm)
   h = np.linalg.inv(xm.T * xm) * xm.T * np.mat(y).T
-  print(h[0,0])
-  hx = h[0,0] * x ** 2
+  hp = np.linalg.inv(zm.T * zm) * zm.T * np.mat(y).T
+  print(hp)
+  #hx = h[0,0] * x ** 2
+  hx = zm * hp 
+  print(np.array(hx.T))
+  print(x.shape)
+  print(hx.shape)
   
-  plt.plot(x,y,x,hx)
+  plt.plot(x,y, 'r--', x, np.array(hx), 'go')
   plt.show()
 
 # b
